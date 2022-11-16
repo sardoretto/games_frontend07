@@ -1,24 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import CreateRoute from "./pages/Create";
+import DetailRoute from "./pages/Detail";
+import ListRoute from "./pages/List";
+import UpdateRoute from "./pages/Update";
+import AuthProvider from "./utils/AuthProvider";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    // 3 etap Providerni qaysi komponentlar ishlata olishini begilab, sferaga icha olish
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<ListRoute />} />
+          <Route path="/games/:gameId" element={<DetailRoute />} />
+          <Route path="/games/create" element={<CreateRoute />} />
+          <Route path="/games/update/:gameId" element={<UpdateRoute />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 
